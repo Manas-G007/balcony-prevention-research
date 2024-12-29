@@ -45,6 +45,7 @@ class poseDetector():
         return img
     
     def findLms(self,img,draw=True):
+        highlights=[12,24,26,11,23,25]
         lmsList=[]
         detectPose=self.result.pose_landmarks
         if detectPose:
@@ -53,5 +54,14 @@ class poseDetector():
                 # convert to pixel
                 px,py=int(lm.x*w),int(lm.y*h)
                 lmsList.append([id,px,py])
+
+                if draw:
+                    if id in highlights[:3]:
+                        cv2.circle(img, (px,py), 6, (255,0,0), 2)
+                        cv2.circle(img, (px,py), 4, (244,244,244), cv2.FILLED)
+                    
+                    if id in highlights[3:]:
+                        cv2.circle(img, (px,py), 6, (0,255,0), 2)
+                        cv2.circle(img, (px,py), 4, (244,244,244), cv2.FILLED)
         
         return lmsList

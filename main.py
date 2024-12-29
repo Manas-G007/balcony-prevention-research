@@ -61,7 +61,9 @@ def detect_climbing(img,lmsList):
     # Draw right angle
     draw_angle(img, p1, p2, p3, right_angle, (0,255,0),False)
     
+    # threshold angles
     if right_angle <= 70 or left_angle <= 70:
+        # verticel orientation
         if lmsList[23][2]<lmsList[25][2] or lmsList[24][2]<lmsList[26][2]:
             safe = False
     else:
@@ -109,6 +111,11 @@ def update():
 def main():
     while running:
         update()
+        if cv2.waitKey(1) & 0xFF == ord('q'):
+            print("Exiting...")
+            break
+    cam.release()
+    cv2.destroyAllWindows()
 
 if __name__ == "__main__":
     main()

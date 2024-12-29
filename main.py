@@ -62,7 +62,8 @@ def detect_climbing(img,lmsList):
     draw_angle(img, p1, p2, p3, right_angle, (0,255,0),False)
     
     if right_angle <= 70 or left_angle <= 70:
-        safe = False
+        if lmsList[23][2]<lmsList[25][2] or lmsList[24][2]<lmsList[26][2]:
+            safe = False
     else:
         safe = True
 
